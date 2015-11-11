@@ -329,9 +329,17 @@ $config-manger-variables: "" !default !global;
 
   @each $setting in $settings {
     @if ($default) {
-      $config-default: map-remove($config-default, $setting) !global;
+      @if ($config-manger-variables == "global") {
+        $config-default: map-remove($config-default, $setting) !global;
+      } @else {
+        $config-default: map-remove($config-default, $setting);
+      }
     } @else {
-      $config-attr: map-remove($config-attr, $setting) !global;
+      @if ($config-manger-variables == "global") {
+        $config-attr: map-remove($config-attr, $setting) !global;
+      } @else {
+        $config-attr: map-remove($config-attr, $setting);
+      }
     }
   }
 
@@ -352,10 +360,18 @@ $config-manger-variables: "" !default !global;
     @if config-map-has($config-default, $key) {
       $value: config-map-get($config-default, $key);
     } @else {
-      $config-default: config-map-set($config-default, $key, $value) !global;
+      @if ($config-manger-variables == "global") {
+        $config-default: config-map-set($config-default, $key, $value) !global;
+      } @else {
+        $config-default: config-map-set($config-default, $key, $value);
+      }
     }
   } @else {
-    $config-attr: config-map-set($config-attr, $key, $value) !global;
+    @if ($config-manger-variables == "global") {
+      $config-attr: config-map-set($config-attr, $key, $value) !global;
+    } @else {
+      $config-attr: config-map-set($config-attr, $key, $value);
+    }
   }
 
   @return $value;

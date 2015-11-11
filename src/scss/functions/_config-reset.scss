@@ -15,13 +15,13 @@
 
   @each $setting in $settings {
     @if ($default) {
-      @if ($config-manger-variables == 'global') {
+      @if ($config-manger-variables == "global") {
         $config-default: map-remove($config-default, $setting) !global;
       } @else {
         $config-default: map-remove($config-default, $setting);
       }
     } @else {
-      @if ($config-manger-variables == 'global') {
+      @if ($config-manger-variables == "global") {
         $config-attr: map-remove($config-attr, $setting) !global;
       } @else {
         $config-attr: map-remove($config-attr, $setting);
